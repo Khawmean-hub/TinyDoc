@@ -216,7 +216,7 @@ function buildDefaultArticle() {
 function onCopyLink() {
   const articleId = $(this).attr('act_id');
   const article = articleRepo.findById(articleId);
-  const link = window.location.origin + '/linkView.html?data=' + encodeURIComponent(JSON.stringify(article.content));
+  const link = window.location.origin + '/tinynoted/linkView.html?data=' + encodeURIComponent(JSON.stringify(article.content));
   copyToClipboard(link);
 }
 
