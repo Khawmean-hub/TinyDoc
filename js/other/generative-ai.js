@@ -1,6 +1,6 @@
 // ------------------------------------------------------------------
-function ask(){
-  const url = "https://www.vongpichdaraboth.net/ai/message?message=" + this;
+function ask(message){
+  const url = "https://www.vongpichdaraboth.net/ai/message?message=" + message;
   const options = {
     method: "GET",
     headers: {
