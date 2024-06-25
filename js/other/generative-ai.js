@@ -11,6 +11,10 @@ function ask(message, callback) {
 
   fetch(url, options)
     .then((response) => callback)
-    .then((data) => resolve(data))
-    .catch((error) => reject(error));
+    .then((data) => (data)=>{
+      console.log('>> ',data);
+    })
+    .catch((error) => (error)=>{
+      console.log(error);
+    });
 }
