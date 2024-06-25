@@ -97,7 +97,7 @@ function onSaveArticle() {
     $editTopic.parent().parent().addClass('error');
     showMessage(VALIDATION_MESSAGE.ARTICLE_NAME_EMPTY, MSG_TYPE.ERROR)
     return;
-  }else{
+  } else {
     $editTopic.parent().parent().removeClass('error');
   }
 
@@ -209,10 +209,12 @@ function buildDefaultArticle() {
   try {
     ask(`${htmlEle} 
 
-        Please replace better text inspiration!`).then(({message})=>{
-          $('#body_content').empty().html(message);
-        })
-  } catch (e) { 
+        Please replace better text inspiration!`, function (message) {
+          console.log(message)
+         $('#body_content').empty().html(message);
+
+    })
+  } catch (e) {
     $('#body_content').empty().html(htmlEle);
   }
 }
@@ -243,7 +245,7 @@ function onSearch() {
   if (searchTerm.length > 1) {
 
     //list of article in current company id
-    const articleList = window.article.filter(a=> topicRepo.findByCurrentCompany()?.some(v=> v.id===a.topicId))
+    const articleList = window.article.filter(a => topicRepo.findByCurrentCompany()?.some(v => v.id === a.topicId))
 
     articleList.forEach(function (item) {
       const title = item.title.toLowerCase();
@@ -260,11 +262,11 @@ function onSearch() {
     });
 
     //empty
-    if(!results){results='<div id="no_data_result"><h3>No Data</h3><p>No result was found. You can only search article title and article content.</p></div>'}
-    
+    if (!results) { results = '<div id="no_data_result"><h3>No Data</h3><p>No result was found. You can only search article title and article content.</p></div>' }
+
     //append
     $('#body_content').html(results);
-  }else{
+  } else {
     buildDefaultArticle();
   }
 

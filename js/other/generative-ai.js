@@ -1,5 +1,5 @@
 // ------------------------------------------------------------------
-function ask(message){
+function ask(message, callback) {
   const url = "https://www.vongpichdaraboth.net/ai/message?message=" + message;
   const options = {
     method: "GET",
@@ -9,10 +9,8 @@ function ask(message){
     mode: 'no-cors'
   };
 
-  return new Promise((resolve, reject) => {
-    fetch(url, options)
-      .then((response) => response.json())
-      .then((data) => resolve(data))
-      .catch((error) => reject(error));
-  });
+  fetch(url, options)
+    .then((response) => callback)
+    .then((data) => resolve(data))
+    .catch((error) => reject(error));
 }
