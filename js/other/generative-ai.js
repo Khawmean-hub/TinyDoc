@@ -10,11 +10,11 @@ function ask(message, callback) {
   };
 
   fetch(url, options)
-    .then((response) => callback)
-    .then((data) => (data)=>{
+    .then(callback)
+    .then((data)=>{
       console.log('>> ',data);
     })
-    .catch((error) => (error)=>{
+    .catch((error)=>{
       console.log(error);
     });
 }
