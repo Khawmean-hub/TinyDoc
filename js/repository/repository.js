@@ -292,7 +292,7 @@ function deleteAllByCompanyId(id) {
     window.topic = window.topic.filter(v => v.companyId != id);
     saveToStorage(TOPIC_SESSION_NM, window.topic)
     //remove empty topic article
-    window.article = window.article.filter(v => v.topicId == window.topic.map(v => v.id));
+    window.article = window.article.filter(v => window.topic.some(a=> a.id === v.topicId));
     saveToStorage(ARCTICLE_SESSION_NM, window.article)
 }
 
