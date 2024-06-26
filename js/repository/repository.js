@@ -1,60 +1,65 @@
-const COMPANY_SESSION_NM = 'tinynoteddatacompany';
-const TOPIC_SESSION_NM = 'tinynoteddatatopic';
-const ARCTICLE_SESSION_NM = 'tinynoteddataarcticle';
-const USER_SESSION_NM = 'tinynoteddatauser';
+const COMPANY_SESSION_NM    = 'tinynoteddatacompany';
+const TOPIC_SESSION_NM      = 'tinynoteddatatopic';
+const ARCTICLE_SESSION_NM   = 'tinynoteddataarcticle';
+const USER_SESSION_NM       = 'tinynoteddatauser';
 
 
 
 //======================================== global ========================================
-//company Repository
-const companyRepo = {
-    findAll: findAllCompnayRepo,
-    save: saveCompanyRepo,
-    saveAll: saveAllCompanyRepo,
-    update: updateCompnayRepo,
-    updateAll: updateAllCompanyRepo,
-    setDefault,
-    delete: deleteCompanyRepo,
-    deleteAll: deleteAllCompanyRepo
-}
+/** company Repository
+ * 
+ *  findAll
+    save
+    saveAll
+    update
+    updateAll
+    setDefault
+    delete
+    deleteAll
+ */
+let companyRepo = {}
 
-//topic Repository
-const topicRepo = {
-    findAll: findAllTopicRepo,
-    save: saveTopicRepo,
-    saveAll: saveAllTopicRepo,
-    update: updateTopicRepo,
-    updateAll: updateAllTopicRepo,
-    delete: deleteTopicRepo,
-    deleteAll: deleteAllTopicRepo,
-    findByCompanyId: findAllByCompanyIdRepo,
-    findByCurrentCompany: findAllByCurrentCompanyRepo,
-    findById: findTopicByIdRepo,
-    findByCurrent: findTopicByCurrentRepo
-}
+/** topic Repository
+ * 
+ *  findAll
+    save
+    saveAll
+    update
+    updateAll
+    delete
+    deleteAll
+    findByCompanyId
+    findByCurrentCompany
+    findById
+    findByCurrent
+ */
+let topicRepo = {}
 
-//article Repository
-const articleRepo = {
-    findAll: findAllArticleRepo,
-    save: saveArticleRepo,
-    saveAll: saveAllArticleRepo,
-    updateAll: updateAllArticleRepo,
-    update: updateArticleRepo,
-    delete: deleteArticleRepo,
-    deleteAll: deleteAllArticleRepo,
-    findByTopicId: findAllByTopicIdRepo,
-    findByCurrentTopic: findAllByCurrentTopicRepo,
-    findById: findArticleByIdRepo,
-    findByCurrent: findArticleByCurrentRepo
-}
 
-//user Repository
-const userRepo = {
-    findOne: findUserOne,
-    update: updateUser,
-    updateProfile,
+/**article Repository
+ * 
+ *  findAll
+    save
+    saveAll
+    updateAll
+    update
+    delete
+    deleteAll
+    findByTopicId
+    findByCurrentTopic
+    findById
+    findByCurrent
+ */
+let articleRepo = {}
+
+/**user Repository
+ * 
+ *  findOne
+    update
+    updateProfile
     updateUsername
-}
+ */
+let userRepo = {}
 
 
 //======================================== COMPANY or Document ========================================
@@ -63,7 +68,7 @@ const userRepo = {
  * list all companies
  * @returns Array
  */
-function findAllCompnayRepo() {
+companyRepo.findAll = ()=> {
     return getFromStorage(COMPANY_SESSION_NM);
 }
 
@@ -71,7 +76,7 @@ function findAllCompnayRepo() {
 /**
  * Save new company
  */
-function saveCompanyRepo(companyName) {
+companyRepo.save = (companyName) => {
     const company = {
         companyName: companyName,
         id: 'company' + getRandId(),
@@ -85,7 +90,7 @@ function saveCompanyRepo(companyName) {
  * Save all company
  * @param {Array} companies 
  */
-function saveAllCompanyRepo(companies){
+companyRepo.saveAll = (companies) => {
     window.company = [...window.company, ...companies]
     saveToStorage(COMPANY_SESSION_NM, window.company);
 }
@@ -95,7 +100,7 @@ function saveAllCompanyRepo(companies){
  * @param {String} id 
  * @param {String} companyName 
  */
-function updateCompnayRepo(id, companyName) {
+companyRepo.update = (id, companyName) => {
     window.company.find(v => v.id == id).companyName = companyName;
     saveToStorage(COMPANY_SESSION_NM, window.company)
 }
@@ -104,7 +109,7 @@ function updateCompnayRepo(id, companyName) {
  * Update all companies
  * @param {Array} companies 
  */
-function updateAllCompanyRepo(companies){
+companyRepo.updateAll = (companies) => {
     window.company = window.company.map(v=> {
         if(companies.some(a=> a.id === v.id)){
             return companies.find(a=> a.id === v.id)
@@ -119,7 +124,7 @@ function updateAllCompanyRepo(companies){
  * Set default company
  * @param {String} id 
  */
-function setDefault(id){
+companyRepo.setDefault = (id) => {
     window.company.map(v => {
         if(v.id == id){
             v.isDefault = true;
@@ -135,7 +140,7 @@ function setDefault(id){
  * delete company
  * @param {String} id 
  */
-function deleteCompanyRepo(id) {
+companyRepo.delete = (id) => {
     if (window.company.length > 1) {
         window.company = window.company.filter(v => v.id != id);
     } else {
@@ -149,7 +154,7 @@ function deleteCompanyRepo(id) {
 /**
  * Delete All companies
  */
-function deleteAllCompanyRepo(){
+companyRepo.deleteAll = () => {
     window.company = [{
         companyName: 'Your Docs',
         id: 'company' + getRandId(),
@@ -164,7 +169,7 @@ function deleteAllCompanyRepo(){
  * get all topics
  * @returns Array
  */
-function findAllTopicRepo() {
+topicRepo.findAll = () => {
     return getFromStorage(TOPIC_SESSION_NM);
 }
 
@@ -173,7 +178,7 @@ function findAllTopicRepo() {
  * @param {String} companyId 
  * @returns 
  */
-function findAllByCompanyIdRepo(companyId) {
+topicRepo.findByCompanyId = (companyId) => {
     return window.topic.filter(v => v.companyId == companyId);
 }
 
@@ -181,7 +186,7 @@ function findAllByCompanyIdRepo(companyId) {
  * get all with current company id
  * @returns Array
  */
-function findAllByCurrentCompanyRepo() {
+topicRepo.findByCurrentCompany = () => {
     return window.topic.filter(v => v.companyId == window.currentCompanyId);
 }
 
@@ -190,7 +195,7 @@ function findAllByCurrentCompanyRepo() {
  * @param {String} id 
  * @returns Object
  */
-function findTopicByIdRepo(id) {
+topicRepo.findById = (id) => {
     return window.topic.find(v => v.id == id);
 }
 
@@ -198,7 +203,7 @@ function findTopicByIdRepo(id) {
  * find one by current
  * @returns Object
  */
-function findTopicByCurrentRepo() {
+topicRepo.findByCurrent = () => {
     return window.topic.find(v => v.id == window.currentTopicId);
 }
 
@@ -207,7 +212,7 @@ function findTopicByCurrentRepo() {
  * @param {String} topicName 
  * @returns Object
  */
-function saveTopicRepo(topicName) {
+topicRepo.save = (topicName) => {
     const topic = {
         topicName: topicName,
         companyId: window.currentCompanyId,
@@ -225,7 +230,7 @@ function saveTopicRepo(topicName) {
  * Save all topics
  * @param {Array} topics 
  */
-function saveAllTopicRepo(topics){
+topicRepo.saveAll = (topics) => {
     window.topic = [...window.topic, ...topics]
     saveToStorage(TOPIC_SESSION_NM, window.topic);
 }
@@ -236,7 +241,7 @@ function saveAllTopicRepo(topics){
  * @param {String} topicName 
  * @returns 
  */
-function updateTopicRepo(id, topicName) {
+topicRepo.update = (id, topicName) => {
     window.topic.map(v => {
         if (v.id == id) {
             v.topicName = topicName;
@@ -254,7 +259,7 @@ function updateTopicRepo(id, topicName) {
  * Update All topic
  * @param {Array} topics 
  */
-function updateAllTopicRepo(topics){
+topicRepo.updateAll = (topics) => {
     window.topic = window.topic.map(v=> {
         if(topics.some(a=> a.id === v.id)){
             return topics.find(a=> a.id === v.id)
@@ -269,7 +274,7 @@ function updateAllTopicRepo(topics){
  * delete topic
  * @param {String} id 
  */
-function deleteTopicRepo(id) {
+topicRepo.delete = (id) => {
     window.topic = window.topic.filter(v => v.id != id);
     saveToStorage(TOPIC_SESSION_NM, window.topic)
     deleteAllByTopicId(id);
@@ -279,7 +284,7 @@ function deleteTopicRepo(id) {
 /**
  * Delete all topics
  */
-function deleteAllTopicRepo(){
+topicRepo.deleteAll = () => {
     window.topic = []
     saveToStorage(TOPIC_SESSION_NM, window.topic)
 }
@@ -301,7 +306,7 @@ function deleteAllByCompanyId(id) {
  * get all article
  * @returns Array
  */
-function findAllArticleRepo() {
+articleRepo.findAll = () => {
     return getFromStorage(ARCTICLE_SESSION_NM);
 }
 
@@ -310,7 +315,7 @@ function findAllArticleRepo() {
  * @param {String} topicId 
  * @returns Array
  */
-function findAllByTopicIdRepo(id) {
+articleRepo.findByTopicId = (id) => {
     return window.article.filter(v => v.topicId == id);
 }
 
@@ -318,7 +323,7 @@ function findAllByTopicIdRepo(id) {
  * get all with current topic id
  * @returns Array
  */
-function findAllByCurrentTopicRepo() {
+articleRepo.findByCurrentTopic = () => {
     return window.article.filter(v => v.topicId == window.currentTopicId);
 }
 
@@ -327,7 +332,7 @@ function findAllByCurrentTopicRepo() {
  * @param {String} id 
  * @returns Object
  */
-function findArticleByIdRepo(id) {
+articleRepo.findById = (id) => {
     return window.article.find(v => v.id == id);
 }
 
@@ -335,7 +340,7 @@ function findArticleByIdRepo(id) {
  * find one by current
  * @returns Object
  */
-function findArticleByCurrentRepo() {
+articleRepo.findByCurrent = () => {
     return window.article.find(v => v.id == window.currentArticleId);
 }
 
@@ -345,7 +350,7 @@ function findArticleByCurrentRepo() {
  * @param {String} content
  * @returns Object
  */
-function saveArticleRepo(title, content) {
+articleRepo.save = (title, content) => {
     const article = {
         title: title,
         content: content,
@@ -364,7 +369,7 @@ function saveArticleRepo(title, content) {
  * Save all new article
  * @param {Array} articles 
  */
-function saveAllArticleRepo(articles){
+articleRepo.saveAll = (articles) => {
     window.article = [...window.article, ...articles]
     saveToStorage(ARCTICLE_SESSION_NM, window.article);
 }
@@ -376,7 +381,7 @@ function saveAllArticleRepo(articles){
  * @param {String} article
  * @returns Object
  */
-function updateArticleRepo(id, title, content) {
+articleRepo.update = (id, title, content) => {
     window.article.map(v => {
         if (v.id == id) {
             v.title = title;
@@ -395,7 +400,7 @@ function updateArticleRepo(id, title, content) {
  * Update all article
  * @param {Array} articles 
  */
-function updateAllArticleRepo(articles){
+articleRepo.updateAll = (articles) => {
     window.article = window.article.map(v=> {
         if(articles.some(a=> a.id === v.id)){
             return articles.find(a=> a.id === v.id)
@@ -410,7 +415,7 @@ function updateAllArticleRepo(articles){
  * Delete by id
  * @param {String} id 
  */
-function deleteArticleRepo(id) {
+articleRepo.delete = (id) => {
     window.article = window.article.filter(v => v.id != id);
     saveToStorage(ARCTICLE_SESSION_NM, window.article)
     showMyMessage(MESSAGE.DELETE_ARTICLE_SUCCESS);
@@ -419,7 +424,7 @@ function deleteArticleRepo(id) {
 /**
  * Delete all article
  */
-function deleteAllArticleRepo(){
+articleRepo.deleteAll = () => {
     window.article = []
     saveToStorage(ARCTICLE_SESSION_NM, window.article)
 }
@@ -438,11 +443,11 @@ function deleteAllByTopicId(id) {
  * get only one user
  * @returns Object
  */
-function findUserOne() {
+userRepo.findOne = () => {
     return getFromStorage(USER_SESSION_NM)
 }
 
-function updateUser(username, profile, password){
+userRepo.update = (username, profile, password) => {
     if (username) {
         window.user.username = username;
         window.user.password = password;
@@ -458,7 +463,7 @@ function updateUser(username, profile, password){
  * profile
  * @param {String} str 
  */
-function updateProfile(str) {
+userRepo.updateProfile = (str) => {
     if (str) {
         window.user.profile = str;
         saveToStorage(USER_SESSION_NM, window.user);
@@ -472,7 +477,7 @@ function updateProfile(str) {
  * update username
  * @param {String} str 
  */
-function updateUsername(str) {
+userRepo.updateUsername = (str) => {
     if (str) {
         window.user.username = str;
         saveToStorage(USER_SESSION_NM, window.user);
