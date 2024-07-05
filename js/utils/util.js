@@ -124,7 +124,7 @@ function newEditor(str = '') {
             editor.ui.registry.addButton('generateAIContent', {
                 text : 'Generate AI Content',
                 onAction : function () {
-                    ask({random:true}, ({text}) => {
+                    ask({message:null,random:'true'}, ({text}) => {
                         const md = new markdownit();
                         const htmlContent = md.render(text);
                         const editor = tinymce.activeEditor;

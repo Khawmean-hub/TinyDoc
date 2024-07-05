@@ -298,7 +298,7 @@ function setTextareaHeight() {
 function doMagic() {
   const prompt = $("#prompt").val();
   $("#prompt").val("")
-  ask({message:prompt},({text})=>{
+  ask({message : prompt, random : null},({text})=>{
     // Create a markdown-it instance
     const md = new markdownit();
 
