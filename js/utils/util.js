@@ -1,7 +1,8 @@
 //=============================== Global Variable ===============================
 const EDITOR_MODE= {
     SAVE: 'Save',
-    UPDATE: 'Update'
+    UPDATE: 'Update',
+    ISLOADING: false
 }
 
 
@@ -108,6 +109,7 @@ const languages = [
     {text: 'TypeScript', value: 'typescript'}
 ];
 
+
 /**
  * create tiny editor
  * @param {String} str 
@@ -117,8 +119,23 @@ function newEditor(str = '') {
     tinymce.init({
         selector: "#editor1",
         plugins: "anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount",
-        toolbar: "fontfamily fontsize | bold italic underline strikethrough | align lineheight | numlist bullist indent outdent | link image media table | emoticons charmap | removeformat"
-        ,init_instance_callback: function (inst) {
+        toolbar: "fontfamily fontsize | bold italic underline strikethrough | align lineheight | numlist bullist indent outdent | link image media table | emoticons charmap | removeformat | generateAIContent",
+        setup: function (editor) {
+            editor.ui.registry.addButton('generateAIContent', {
+                text : 'Generate AI Content',
+                onAction : function () {
+                    ask({random:true}, ({text}) => {
+                        const md = new markdownit();
+                        const htmlContent = md.render(text);
+                        const editor = tinymce.activeEditor;
+                        if (editor) {
+                            editor.setContent(htmlContent)
+                        };
+                    })
+                }
+            });
+        },
+        init_instance_callback: function (inst) {
             inst.setContent(str);
         },
         codesample_languages: languages,
@@ -126,6 +143,9 @@ function newEditor(str = '') {
         //language: 'ko_KR',
     });
 }
+
+
+
 /**
  * get html data from tiny editor
  * @returns String

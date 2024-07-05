@@ -7,6 +7,7 @@ $(document).on('click', '.btn_article_delete_confirm', onDeleteArticle)
 $(document).on('click', '.copy_link', onCopyLink)
 $(document).on('input', '#search_box input', onSearch)
 $(document).on('click', '.search_title_res', onSearchResClick)
+$(document).on('click', '#magic', doMagic)
 
 
 
@@ -206,17 +207,7 @@ function buildDefaultArticle() {
         <p style="color: grey">Hello and welcome to TinyNoted, where your ideas, tasks, and inspirations find their perfect home. Whether you're a student, professional, or creative thinker, TinyNoted is designed to help you capture and organize your thoughts effortlessly.</p>
         </div>
         `
-  try {
-    ask(`${htmlEle} 
-
-        Please replace better text inspiration!`, function (message) {
-          console.log(message)
-         $('#body_content').empty().html(message);
-
-    })
-  } catch (e) {
-    $('#body_content').empty().html(htmlEle);
-  }
+  $('#body_content').empty().html(htmlEle);
 }
 
 /**
@@ -297,4 +288,32 @@ function setTextareaHeight() {
   const vh = $(window).height(); // Get viewport height
   const desiredHeight = (vh * 1) - 200; // Calculate desired height
   $('#editor1').height(desiredHeight); // Set height of textarea
+}
+
+
+
+/**
+ * Ask AI to generate content
+ */
+function doMagic() {
+  const prompt = $("#prompt").val();
+  $("#prompt").val("")
+  ask({message:prompt},({text})=>{
+    // Create a markdown-it instance
+    const md = new markdownit();
+
+    // Parse markdown to HTML
+    const htmlContent = md.render(text);
+    // Get the active TinyMCE editor
+    const editor = tinymce.activeEditor;
+
+    if (editor) {
+      // Append the parsed HTML to the editor
+      editor.setContent(htmlContent)
+      console.log(editor);
+    } else {
+      console.error("TinyMCE editor not found");
+    }
+    console.log(htmlContent);
+  })
 }

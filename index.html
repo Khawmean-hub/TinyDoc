@@ -2,9 +2,16 @@
 <html lang="en">
 
 <head>
+  <link rel="manifest" href="manifest.json">
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#222" />
+  <meta name="description" content="My First PWA">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="My PWA">
+  <link rel="apple-touch-icon" href="assets/icons/icon-152x152.png">
   <title>📙TinyNoted</title>
   <link rel="stylesheet" href="js/dist/semantic.min.css">
   <link rel="stylesheet" href="css/index.css">
@@ -13,6 +20,7 @@
   <link href="css/toast.css" rel="stylesheet"/>
 
   <script src="js/other/generative-ai.js"></script>
+  <script src="js/other/mark-it.js"></script>
   <script src="js/other/jquery.js"></script>
   <script src="js/dist/semantic.min.js"></script>
   <script src="js/tinymce/tinymce.min.js"></script>
@@ -162,13 +170,21 @@
       <div style="display: flex; justify-content: space-between;align-items: center;">
         <div><h3 style="padding-left: 7px" id="editor_mode">New article</h3></div>
         <div style="display: flex; align-items: center;">
-          <form onsubmit="return false;" class="ui form tiny" style="width: 400px; padding-right: 10px">
+          <form onsubmit="return false;" class="ui form tiny" style="width: 800px; padding-right: 10px">
+            <div class="inline fields" style="margin-bottom: 0 !important;">
+              <div class="field sixteen wide required">
+                <div class="ui labeled input required">
+                  <div class="ui label button tiny" id="magic" >Magic</div>
+                  <input type="text" placeholder="magic words" id="prompt">
+                </div>
+              </div>
               <div class="field sixteen wide required">
                 <div class="ui labeled input required">
                   <div class="ui label" id="topic_name_here">Topic: Love you > title</div>
                   <input type="text" placeholder="Title" id="topic_edit">
                 </div>
               </div>
+            </div>
           </form>
           <div class="ui cancel tiny button" style="margin-right: 9px;">Close</div>
           <div class="ui teal button tiny" id="editor_save">Save</div>

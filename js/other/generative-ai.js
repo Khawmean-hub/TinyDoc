@@ -1,18 +1,18 @@
 // ------------------------------------------------------------------
-function ask(message, callback) {
-  const url = "https://www.vongpichdaraboth.net/ai/message?message=" + message;
+function ask(request, callback) {
+  const url = "https://tinynotie-api.vercel.app/openai/text?text=" + request.message + "&random=" + request.random;
   const options = {
     method: "GET",
     headers: {
       accept: "application/json",
     },
-    mode: 'no-cors'
   };
 
   fetch(url, options)
-    .then(callback)
+    .then(res=>res.json())
     .then((data)=>{
       console.log('>> ',data);
+      callback(data)
     })
     .catch((error)=>{
       console.log(error);
