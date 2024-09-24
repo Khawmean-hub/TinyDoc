@@ -204,7 +204,13 @@ function changeToLight(){
 
 
 function onLoadTheme(){
-    const theme = localStorage.getItem('my_theme')
+    const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    let theme = localStorage.getItem('my_theme')
+
+    if(theme === undefined || theme === null && isDarkMode){
+        theme = 'dark'
+    }
+    
     if(theme === 'dark'){
         changeToDark()
         $('#theme_mode').prop('checked', true)
