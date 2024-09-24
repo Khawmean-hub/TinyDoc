@@ -8,7 +8,8 @@
     <title>📙TinyNoted</title>
     <link rel="stylesheet" href="js/dist/semantic.min.css">
     <link rel="stylesheet" href="css/index.css">
-    <link rel="stylesheet" href="css/stack_overflow_skin.css">
+    <link rel="stylesheet" href="css/dark.css">
+    <link rel="stylesheet" href="css/stack_overflow_skin.css" id="theme_css">
   
     <link href="css/toast.css" rel="stylesheet" />
   
@@ -47,6 +48,7 @@
                 let html = decodeURIComponent(data)
                 $('.ui.container').empty().html(html);
                 highlightCode();
+                onLoadTheme()
             } catch (e) {
                 console.log(e)
             }

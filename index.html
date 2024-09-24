@@ -15,7 +15,9 @@
   <title>📙TinyNoted</title>
   <link rel="stylesheet" href="js/dist/semantic.min.css">
   <link rel="stylesheet" href="css/index.css">
-  <link rel="stylesheet" href="css/stack_overflow_skin.css">
+  <link rel="stylesheet" href="css/dark.css">
+  <!-- <link rel="stylesheet" href="css/stack_overflow_skin.css"> -->
+  <link rel="stylesheet" href="css/stack_over_dark.css" id="theme_css">
 
   <link href="css/toast.css" rel="stylesheet"/>
 
@@ -31,7 +33,7 @@
 
 </head>
 
-<body>
+<body class="dark">
   <div id="page-login" style="display: none;">
     <div class="page-login"
       style="height: 100vh; width: 100vw; display: flex; align-items: center; justify-content: center;">
@@ -120,7 +122,10 @@
         </div>
 
         <div class="right_item">
-
+          <div></div>
+          <div>
+            <input type="checkbox" class="toggle" id="theme_mode">
+          </div>
           <!-- ========================================================Profile=========================================================== -->
           <div>
             <div class="ui floating labeled icon dropdown profile">

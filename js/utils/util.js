@@ -115,8 +115,10 @@ const languages = [
  * @param {String} str 
  */
 function newEditor(str = '') {
-    tinymce.remove("#editor1");
-    tinymce.init({
+
+    var isDark = $('#theme_mode').prop('checked')
+
+    var config = {
         selector: "#editor1",
         plugins: "anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount",
         toolbar: "fontfamily fontsize | bold italic underline strikethrough | align lineheight | numlist bullist indent outdent | link image media table | emoticons charmap | removeformat | generateAIContent",
@@ -138,10 +140,17 @@ function newEditor(str = '') {
         init_instance_callback: function (inst) {
             inst.setContent(str);
         },
-        codesample_languages: languages,
-        //skin: 'oxide-dark',
-        //language: 'ko_KR',
-    });
+        codesample_languages: languages
+    }
+
+    if(isDark){
+        config.skin = 'oxide-dark'
+        config.content_css = 'dark'
+    };
+
+
+    tinymce.remove("#editor1");
+    tinymce.init(config);
 }
 
 
@@ -177,4 +186,42 @@ function copyToClipboard(str){
     document.execCommand("copy");
     $temp.remove();
     showMessage("Text copied to clipboard!");
+}
+
+
+function changeToDark(){
+    $('body').addClass('dark')
+    $('.ui.accordion, .ui.modal, .ui.table').addClass('inverted')
+    $('#theme_css').attr('href', 'css/stack_over_dark.css')
+
+}
+
+function changeToLight(){
+    $('body').removeClass('dark')
+    $('.ui.accordion, .ui.modal, .ui.table').removeClass('inverted')
+    $('#theme_css').attr('href', 'css/stack_overflow_skin.css')
+}
+
+
+function onLoadTheme(){
+    const theme = localStorage.getItem('my_theme')
+    if(theme === 'dark'){
+        changeToDark()
+        $('#theme_mode').prop('checked', true)
+    }else{
+        changeToLight()
+    }
+}
+
+$(document).on('change', '#theme_mode', onChnageTheme)
+
+function onChnageTheme(){
+    var isChecked = $(this).prop('checked')
+    if(isChecked){
+        localStorage.setItem('my_theme', 'dark')
+        changeToDark()
+    }else{
+        localStorage.setItem('my_theme', '')
+        changeToLight()
+    }
 }

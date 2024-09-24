@@ -1,0 +1,123 @@
+body.dark {
+    background: #141414 !important;
+}
+
+.dark #nav_menu {
+    background: #222222;
+
+}
+
+.dark .ui.top.fixed.menu{
+    border-bottom: 1px solid rgb(56, 56, 56) !important;
+}
+
+.dark #side_bar {
+    background: #222222;
+}
+
+.dark h1,
+.dark h2,
+.dark h3,
+.dark h4,
+.dark h5,
+.dark h6 {
+  color: #ececec;
+}
+
+.dark body,
+.dark p,
+.dark button,
+.dark a,
+.dark h1,
+.dark h2,
+.dark h3,
+.dark h4,
+.dark h5,
+.dark h6,
+.dark div {
+    color: #ececec;
+}
+
+.dark .ui.header {
+    color: #ececec !important;
+}
+
+.dark #search_box input {
+    background: #303030;
+    color: #ececec;
+}
+
+.dark input:focus {
+    background: #303030 !important;
+    color: #ececec !important;
+}
+
+.dark .ui.dropdown .menu {
+    background: #303030 !important;
+    color: #ececec !important;
+}
+.dark .ui.menu .ui.dropdown .menu>.item {
+    color: #ececec !important;
+}
+
+.dark .ui.modal {
+    background: #222222 !important;
+    color: #ececec !important;
+}
+
+.dark .ui.modal .ui.header, .dark .ui.modal>.header {
+    border-bottom: 1px solid rgb(56, 56, 56) !important;
+    background: #222222 !important;
+    color: #ececec !important;
+}
+
+.dark .ui.modal .actions {
+    background: #222222 !important;
+    color: #ececec !important;
+    border-top: 1px solid rgb(56, 56, 56) !important;
+}
+
+.dark .ui.modal>.content {
+    background: #222222 !important;
+    color: #ececec !important;
+}
+
+.dark .ui.modal input {
+    background: #303030;
+    color: #ececec;
+}
+
+.dark .ui.message {
+    background: #272d2e !important;
+    box-shadow: 0 0 0 1px #45565a inset,0 0 0 0 transparent;
+}
+
+.dark .ui.form label {
+    color: #ececec;
+}
+
+.dark .ui.button {
+    background: #303030;
+    color: #ececec;
+}
+
+.dark #data_manage_accordion {
+    background: #222222;
+    color: #ececec;
+}
+
+.dark .ui.vertical.menu .menu .item {
+    color: #a0a0a0;
+}
+
+.dark .article_title_menu.active,
+.dark .article_title_menu:hover {
+    background: #303030 !important;
+}
+
+.dark .dark_mode_la, .dark .item.copy_link {
+    color: #ececec !important;
+}
+.dark .sub.header {
+    color: #a0a0a0 !important;
+}
