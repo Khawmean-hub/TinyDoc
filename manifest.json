@@ -1,6 +1,6 @@
 {
-    "short_name": "TinyNote",
-    "name": "TinyNote",
+    "short_name": "TinyDoc",
+    "name": "TinyDoc",
     "icons": [
         {
             "src": "assets/icons/icon.png",
