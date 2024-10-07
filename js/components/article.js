@@ -202,9 +202,9 @@ function onDeleteArticle() {
  * Build default home page
  */
 function buildDefaultArticle() {
-  const htmlEle = `<div style="margin: 50px; max-width: 500px;"> <h2 class="ui header" >Welcome to TinyNoted!</h2> <br>
+  const htmlEle = `<div style="margin: 50px; max-width: 500px;"> <h2 class="ui header" >Welcome to TinyDoc!</h2> <br>
         <h4>Your Ultimate Digital Note-Taking Companion</h4>
-        <p style="color: grey">Hello and welcome to TinyNoted, where your ideas, tasks, and inspirations find their perfect home. Whether you're a student, professional, or creative thinker, TinyNoted is designed to help you capture and organize your thoughts effortlessly.</p>
+        <p style="color: grey">Hello and welcome to TinyDoc, where your ideas, tasks, and inspirations find their perfect home. Whether you're a student, professional, or creative thinker, TinyDoc is designed to help you capture and organize your thoughts effortlessly.</p>
         </div>
         `
   $('#body_content').empty().html(htmlEle);
