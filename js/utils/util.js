@@ -12,7 +12,8 @@ function highlightCode() {
         hljs.highlightElement(el);
     });
     $('pre code').append('<i class="copy outline icon copy_code"></i>')
-    $('#body_content table').addClass('ui compact table')
+    var dark = $('#theme_mode').prop('checked') ? 'inverted' : ''
+    $('#body_content table').addClass('ui compact table ' + dark)
     
 }
 
